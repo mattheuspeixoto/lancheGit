@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<LanchesMac.Models.Lanche>
 
+@*
 @{
     ViewData["Title"] = "List";
 }
@@ -81,3 +82,14 @@
 }
     </tbody>
 </table>
+    *@
+
+<div> <h2> Todos os Lanches</h2></div>
+
+@foreach(var lanche in Model){
+    <div>
+    <h4>Lanche: @lanche.Nome </h4>
+    <p><img src="@lanche.ImagemUrl"></p>
+    <p> Preço: @lanche.Preco.ToString("c") </p>    
+    </div>
+}
