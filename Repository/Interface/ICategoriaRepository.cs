@@ -1,5 +1,5 @@
 using LanchesMac.Models;
 
-public interface iCategoriaRespotory{
+public interface ICategoriaRepository{
     public IEnumerable<Categoria> categoria  { get;}
 }

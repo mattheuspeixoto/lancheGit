@@ -1,9 +1,9 @@
 using LanchesMac.Models;
 
-public interface iLanchesRespotory
+public interface ILanchesRepository
 {
     IEnumerable<Lanche> Lanches { get; }
     IEnumerable<Lanche> Lanchespreferidos { get; }
-  Lanche GetLanchebyID(int lancheid);
+     Lanche GetLanchebyID(int lancheid);
 
 }

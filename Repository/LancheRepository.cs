@@ -2,7 +2,7 @@ using LanchesMac.Context;
 using LanchesMac.Models;
 using Microsoft.EntityFrameworkCore;
 
-public class LancheRepository : iLanchesRespotory{
+public class LancheRepository : ILanchesRepository{
     private readonly AppDbContext _context;
     public LancheRepository(AppDbContext contexto){
         _context = contexto;

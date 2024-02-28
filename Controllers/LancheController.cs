@@ -3,9 +3,9 @@
 namespace LanchesMac.Controllers {
     public class LancheController : Controller {
 
-        private readonly iLanchesRespotory _lancheRepository;
+        private readonly ILanchesRepository _lancheRepository;
 
-        public LancheController(iLanchesRespotory lancheRepository) {
+        public LancheController(ILanchesRepository lancheRepository) {
             _lancheRepository = lancheRepository;
         }
 
