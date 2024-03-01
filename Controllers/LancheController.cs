@@ -12,7 +12,7 @@ namespace LanchesMac.Controllers {
 
         public IActionResult List() {
             ViewData["Titulo"] = "Todos os Lanches";
-            ViewData["Data"] = DateTime.Now;
+            ViewData["Data"] = DateTime.Now.ToShortDateString();
             var lanche = _lancheRepository.Lanches;
             var totallanches = lanche.Count();
 
