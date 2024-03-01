@@ -15,6 +15,8 @@ namespace LanchesMac.Controllers{
         }
 
         public IActionResult Index(){
+
+            // o Carrinho de compra é instanciado so com o ID, quando chega aqui é realizado uma consulta no banco para obter os itens do carrinho
             _carrinhocompra.CarrinhoCompraItems = _carrinhocompra.GetCarrinhoComprasItens();
 
             // A ViewModel Recebe a instancia do carrinho compra
