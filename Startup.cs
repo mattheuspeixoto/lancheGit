@@ -1,5 +1,8 @@
 ﻿using LanchesMac.Context;
 using Microsoft.EntityFrameworkCore;
+using LanchesMac.Repository;
+using LanchesMac.Repository.Interface;
+using LanchesMac.Models;
 
 namespace LanchesMac;
 public class Startup

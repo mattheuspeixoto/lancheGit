@@ -1,6 +1,8 @@
 using LanchesMac.Context;
 using LanchesMac.Models;
+using LanchesMac.Repository.Interface; 
 
+namespace LanchesMac.Repository;
 public class CategoriaRepository : ICategoriaRepository{
     private readonly AppDbContext _context;
 

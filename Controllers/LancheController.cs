@@ -1,4 +1,5 @@
 ﻿using LanchesMac.ViewsModels;
+using LanchesMac.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanchesMac.Controllers {
