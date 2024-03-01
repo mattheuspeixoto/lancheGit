@@ -2,9 +2,9 @@
 
 <div class="container">
     <div class="row">
-        <img src="~/images/Full-Cart-icon.png" />
         <div>
-            <h4> Seu Carrinho de Compras</h4>
+            <img src="~/images/Full-Cart-icon.png" width="30" height="35" />
+            <h4>Seu carrinho de compras : </h4>
         </div>
         <table class="table table-bordered table-striped">
             <thead>
@@ -42,9 +42,10 @@
                 </tr>
             </tfoot>
         </table>
+
         <div class="text-right">
             <div class="btn-group">
-                <a class="btn btn-sucess" asp-controller="Pedido" asp-action="Checkout">Encerrar Pedido</a>
+                <a class="btn btn-success" asp-controller="Pedido" asp-action="Checkout">Encerrar Pedido</a>
                 &nbsp;&nbsp;&nbsp;
                 <a class="btn btn-primary" asp-asp-controller="Lanche" asp-action="List">Continuar Pedido</a>
             </div>
