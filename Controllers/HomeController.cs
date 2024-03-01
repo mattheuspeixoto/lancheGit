@@ -1,15 +1,23 @@
 ﻿using LanchesMac.Models;
+using LanchesMac.Repository.Interface;
+using LanchesMac.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace LanchesMac.Controllers
-{
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
+namespace LanchesMac.Controllers{
+    public class HomeController : Controller{
+
+        private readonly ILanchesRepository _lancheRepository;
+        public HomeController(ILanchesRepository lanchesRepository)
         {
-            TempData["Nome"] = "Macoratti";
-            return View();
+            _lancheRepository = lanchesRepository;
+        }
+        public IActionResult Index(){
+            var HomeViewModel = new HomeViewModel{
+                LanchesPreferidos = _lancheRepository.Lanchespreferidos
+            };
+            
+            return View(HomeViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
