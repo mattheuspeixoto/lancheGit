@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LanchesMac.ViewsModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LanchesMac.Controllers {
     public class LancheController : Controller {
@@ -17,7 +18,11 @@ namespace LanchesMac.Controllers {
 
             ViewBag.total = "Total de Lanches: ";
             ViewBag.totallanhces = totallanches;
-            return View(lanche);
+
+            var lancheListViewModel = new LancheListViewModel();
+            lancheListViewModel.lanches = _lancheRepository.Lanches;
+            lancheListViewModel.Categoria = "Atual";
+            return View(lancheListViewModel);
         }
     }
 }
