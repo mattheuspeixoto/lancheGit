@@ -15,7 +15,7 @@ namespace LanchesMac.Controllers {
             var lanche = _lancheRepository.Lanches;
             var totallanches = lanche.Count();
 
-            ViewBag.total = "Total de Lanches";
+            ViewBag.total = "Total de Lanches: ";
             ViewBag.totallanhces = totallanches;
             return View(lanche);
         }
