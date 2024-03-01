@@ -21,6 +21,7 @@ public class Startup
         services.AddTransient<ILanchesRepository,LancheRepository>();
         services.AddTransient<ICategoriaRepository,CategoriaRepository>();
         services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+        services.AddScoped(sp=> CarrinhoCompra.GetCarrinho(sp));
         services.AddControllersWithViews();
         services.AddMemoryCache();
         services.AddSession();
