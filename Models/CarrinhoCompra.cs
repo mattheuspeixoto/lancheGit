@@ -9,6 +9,7 @@ public class CarrinhoCompra
     public CarrinhoCompra(AppDbContext contexto){
         _context = contexto;
     }
+    //Carrinho de Compras Possui um ID e uma Lista de Itens
     public String CarrinhoCompraId { get; set; }
     public List<CarrinhoCompraItem> CarrinhoCompraItems { get; set; }
 
@@ -68,6 +69,15 @@ public class CarrinhoCompra
         return quantidadelocal;
     }
 
+    public void Remover(Lanche lanche){
+        var carrinhoCompraItem = _context.CarrinhoCompraItems.SingleOrDefault(
+            s => s.Lanche.LancheId == lanche.LancheId &&
+            s.CarrinhoCompraId == CarrinhoCompraId);
+        if (carrinhoCompraItem != null){
+            _context.CarrinhoCompraItems.Remove(carrinhoCompraItem);
+            _context.SaveChanges();
+        }
+    }
     public List<CarrinhoCompraItem> GetCarrinhoComprasItens(){
         return CarrinhoCompraItems ??
                (CarrinhoCompraItems =

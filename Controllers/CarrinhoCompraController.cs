@@ -19,7 +19,7 @@ namespace LanchesMac.Controllers{
             // o Carrinho de compra é instanciado so com o ID, quando chega aqui é realizado uma consulta no banco para obter os itens do carrinho
             _carrinhocompra.CarrinhoCompraItems = _carrinhocompra.GetCarrinhoComprasItens();
 
-            // A ViewModel Recebe a instancia do carrinho compra
+            // A ViewModel Recebe a instancia do carrinho compra com o id do carrinho e os itens 
             var carrinhocompraVM = new CarrinhoCompraViewModels{
                 vmCarrinhoCompra = _carrinhocompra,
                 vmCarrinhoCompraTotal = _carrinhocompra.GetCarrinhoCompraTotal(),
@@ -42,6 +42,16 @@ namespace LanchesMac.Controllers{
             // Verifica se o lanche selecionado Existe
             if(lancheselecionado!=null){
                 _carrinhocompra.RemoverDoCarrinho(lancheselecionado);
+            }
+            return RedirectToAction("Index");
+        }
+
+         public RedirectToActionResult Remover(int lancheId){
+            var lancheselecionado = _lancheRepository.GetLanchebyID(lancheId);
+            
+            // Verifica se o lanche selecionado Existe
+            if(lancheselecionado!=null){
+                _carrinhocompra.Remover(lancheselecionado);
             }
             return RedirectToAction("Index");
         }
