@@ -13,7 +13,6 @@ namespace LanchesMac.Controllers {
         }
 
         public IActionResult List(string categoria) {
-            ViewData["Titulo"] = "Todos os Lanches";
             ViewData["Data"] = DateTime.Now.ToShortDateString();
             var lanche = _lancheRepository.Lanches;
             var totallanches = lanche.Count();
@@ -23,10 +22,12 @@ namespace LanchesMac.Controllers {
             IEnumerable<Lanche> lanches;
             string categoriaAtual = string.Empty;
             if (string.IsNullOrWhiteSpace(categoria)){
+                ViewData["Titulo"] = "Todos os Lanches";
                 lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
                 categoriaAtual = "Todos os Lanches";
             }
-            else{                
+            else{            
+                ViewData["Titulo"] = categoria;
                 lanches = _lancheRepository.Lanches
                 .Where(l=> l.Categoria.CategoriaNome.Equals(categoria))
                 .OrderBy(l=> l.Nome);
@@ -37,6 +38,11 @@ namespace LanchesMac.Controllers {
             lancheListViewModel.lanches = lanches;
             lancheListViewModel.Categoria = categoria; //Nao da pra chamar _lancheRepository.Lanches.Categoria pq Lanches é uma Lista
             return View(lancheListViewModel);
+        }
+
+        public IActionResult Details(int lancheId){
+            var lanche = _lancheRepository.Lanches.FirstOrDefault(l=> l.LancheId ==lancheId);
+            return View(lanche);
         }
     }
 }
