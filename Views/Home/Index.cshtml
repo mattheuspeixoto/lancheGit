@@ -1,4 +1,4 @@
-﻿@model HomeViewModel
+﻿@model HomeViewModel // Recebe do HomeController uma ViewModel com os lanches preferidos
 
 <partial name="_Carousel"/>
 
@@ -7,6 +7,7 @@
 
 <div class="row">
     @foreach(var lanche in Model.LanchesPreferidos){
+        //Chama a partial view Lanche Resumo e passa o Lanche
         <partial name="_LanchesResumo" for="@lanche"></partial>
     }
 </div>

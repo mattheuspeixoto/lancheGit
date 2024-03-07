@@ -17,6 +17,7 @@ namespace LanchesMac.Controllers{
                 LanchesPreferidos = _lancheRepository.Lanchespreferidos
             };
             
+            // Passa para a view (home/index.cstml) uma lista de lanches preferidos
             return View(HomeViewModel);
         }
 

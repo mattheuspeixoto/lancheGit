@@ -20,9 +20,10 @@ namespace LanchesMac.Controllers {
             ViewBag.total = "Total de Lanches: ";
             ViewBag.totallanhces = totallanches;
 
+            // Puxa a lista de Lanches e passa para a View (Lanche/List.cshtml)
             var lancheListViewModel = new LancheListViewModel();
             lancheListViewModel.lanches = _lancheRepository.Lanches;
-            lancheListViewModel.Categoria = "Atual";
+            lancheListViewModel.Categoria = "Atual"; //Nao da pra chamar _lancheRepository.Lanches.Categoria pq Lanches é uma Lista
             return View(lancheListViewModel);
         }
     }

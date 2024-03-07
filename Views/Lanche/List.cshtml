@@ -1,4 +1,4 @@
-﻿@model LancheListViewModel;
+﻿@model LancheListViewModel; // Recebe a Lista de Lanches do LancheController
 
 
 <div style="text-align:center">
@@ -12,9 +12,8 @@
 
 <div class="container">
     <div class="row">
-
-        @foreach (var lanche in Model.lanches)
-        {
+        
+        @foreach (var lanche in Model.lanches){// Passa Lanche por lanche para a View _lancheResumo
             <partial name="_LanchesResumo" for="@lanche"/>
         }
     </div>
