@@ -1,6 +1,7 @@
 ﻿using LanchesMac.ViewsModels;
 using LanchesMac.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using LanchesMac.Models;
 
 namespace LanchesMac.Controllers {
     public class LancheController : Controller {
@@ -11,7 +12,7 @@ namespace LanchesMac.Controllers {
             _lancheRepository = lancheRepository;
         }
 
-        public IActionResult List() {
+        public IActionResult List(string categoria) {
             ViewData["Titulo"] = "Todos os Lanches";
             ViewData["Data"] = DateTime.Now.ToShortDateString();
             var lanche = _lancheRepository.Lanches;
@@ -19,11 +20,29 @@ namespace LanchesMac.Controllers {
 
             ViewBag.total = "Total de Lanches: ";
             ViewBag.totallanhces = totallanches;
+            IEnumerable<Lanche> lanches;
+            string categoriaAtual = string.Empty;
+            if (string.IsNullOrWhiteSpace(categoria)){
+                lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
+                categoriaAtual = "Todos os Lanches";
+            }
+            else{
+                if (string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase)){
+                    lanches = _lancheRepository.Lanches
+                    .Where(l => l.Categoria.CategoriaNome.Equals("Normal"))
+                    .OrderBy(l => l.Nome);
+                }
+                else{
+                    lanches = _lancheRepository.Lanches
+                    .Where(l => l.Categoria.CategoriaNome.Equals("Natural"))
+                    .OrderBy(l => l.Nome);
+                }
+            }
 
             // Puxa a lista de Lanches e passa para a View (Lanche/List.cshtml)
             var lancheListViewModel = new LancheListViewModel();
-            lancheListViewModel.lanches = _lancheRepository.Lanches;
-            lancheListViewModel.Categoria = "Atual"; //Nao da pra chamar _lancheRepository.Lanches.Categoria pq Lanches é uma Lista
+            lancheListViewModel.lanches = lanches;
+            lancheListViewModel.Categoria = categoria; //Nao da pra chamar _lancheRepository.Lanches.Categoria pq Lanches é uma Lista
             return View(lancheListViewModel);
         }
     }
