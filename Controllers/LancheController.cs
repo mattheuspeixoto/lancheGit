@@ -26,17 +26,10 @@ namespace LanchesMac.Controllers {
                 lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
                 categoriaAtual = "Todos os Lanches";
             }
-            else{
-                if (string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase)){
-                    lanches = _lancheRepository.Lanches
-                    .Where(l => l.Categoria.CategoriaNome.Equals("Normal"))
-                    .OrderBy(l => l.Nome);
-                }
-                else{
-                    lanches = _lancheRepository.Lanches
-                    .Where(l => l.Categoria.CategoriaNome.Equals("Natural"))
-                    .OrderBy(l => l.Nome);
-                }
+            else{                
+                lanches = _lancheRepository.Lanches
+                .Where(l=> l.Categoria.CategoriaNome.Equals(categoria))
+                .OrderBy(l=> l.Nome);
             }
 
             // Puxa a lista de Lanches e passa para a View (Lanche/List.cshtml)
