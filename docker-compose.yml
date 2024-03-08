@@ -40,3 +40,7 @@ services:
       interval: 10s
       timeout: 30s
       retries: 5
+    volumes:
+      - ./volume/data:/var/opt/mssql/data
+      - ./volume/log:/var/opt/mssql/log
+      - ./volume/secrets:/var/opt/mssql/secrets
