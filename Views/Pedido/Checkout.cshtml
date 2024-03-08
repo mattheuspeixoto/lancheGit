@@ -7,6 +7,18 @@
         var cep = valor.replace(/\D/g, '');
 
         if (cep.length !== 8) {
+            alert("Cep Inválido");
+            
+            document.getElementById('Endereco1').value = "";
+            document.getElementById('Endereco1').readOnly = false; 
+
+            document.getElementById('Cidade').value = "";
+            document.getElementById('Cidade').readOnly = false;
+
+            document.getElementById('Estado').value = "";
+            document.getElementById('Estado').readOnly = false;
+
+            document.getElementById('Cep').value = "";
             return;
         }
 
@@ -18,21 +30,29 @@
                 
                 if (!data.erro) {                 
                   
+                    document.getElementById('Endereco1').value = data.logradouro;
+                    document.getElementById('Cidade').value = data.localidade;
+                    document.getElementById('Estado').value = data.uf;
+                    document.getElementById('Cep').value = data.cep;
+                    
                     if (data.logradouro != "") {
                         document.getElementById('Endereco1').readOnly = true;
                     }else{
                         document.getElementById('Endereco1').readOnly = false;
                     }
-                    document.getElementById('Endereco1').value = data.logradouro;
                     
+                    if (data.localidade != "") {
+                        document.getElementById('Cidade').readOnly = true;
+                    }else{
+                        document.getElementById('Cidade').readOnly = false;
+                    }   
 
-                    document.getElementById('Cidade').value = data.localidade;
-                    document.getElementById('Cidade').readOnly = true;
+                    if (data.uf != "") {
+                        document.getElementById('Estado').readOnly = true;
+                    }else{
+                        document.getElementById('Estado').readOnly = false;
+                    }
 
-                    document.getElementById('Estado').value = data.uf;
-                    document.getElementById('Estado').readOnly = true;
-
-                    document.getElementById('Cep').value = data.cep;
 
                 } else {
                     alert('CEP não encontrado.');
