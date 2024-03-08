@@ -22,9 +22,9 @@ namespace LanchesMac.Controllers {
             IEnumerable<Lanche> lanches;
             string categoriaAtual = string.Empty;
             if (string.IsNullOrWhiteSpace(categoria)){
-                ViewData["Titulo"] = "Todos os Lanches";
+                // ViewData["Titulo"] = "Todos os Lanches";
                 lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
-                categoriaAtual = "Todos os Lanches";
+                categoria = "Todos os Lanches";
             }
             else{            
                 ViewData["Titulo"] = categoria;
@@ -43,6 +43,28 @@ namespace LanchesMac.Controllers {
         public IActionResult Details(int lancheId){
             var lanche = _lancheRepository.Lanches.FirstOrDefault(l=> l.LancheId ==lancheId);
             return View(lanche);
+        }
+
+        public ViewResult Search(string searchString){
+            IEnumerable<Lanche> lanches;
+            string categoriaAtual = string.Empty;
+            if(string.IsNullOrWhiteSpace(searchString)){
+                lanches = _lancheRepository.Lanches.OrderBy(l=> l.LancheId);
+            }
+            else{
+                lanches = _lancheRepository.Lanches.Where(l=>l.Nome.ToLower().Contains(searchString.ToLower()));
+                if(lanches.Any()){
+                    ViewBag.total = "Total de Lanches Encontrados: ";
+                    ViewBag.totallanhces = lanches.Count();
+                    categoriaAtual = "Lanches";
+                }else{
+                    categoriaAtual ="Nenhum lanche foi encontrado";
+                }
+            }
+            return View("~/Views/Lanche/List.cshtml",new LancheListViewModel{
+                lanches = lanches,
+                Categoria = categoriaAtual,
+            });
         }
     }
 }
