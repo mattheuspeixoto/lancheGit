@@ -2,7 +2,60 @@
 
 <h3>Você esta a um passo de completar o seu pedido</h3>
 <hr />
-<form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+<script>
+    function cep(valor) {
+        var cep = valor.replace(/\D/g, '');
+
+        if (cep.length !== 8) {
+            return;
+        }
+
+        fetch('https://viacep.com.br/ws/' + cep + '/json/')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                
+                if (!data.erro) {                 
+                  
+                    if (data.logradouro != "") {
+                        document.getElementById('Endereco1').readOnly = true;
+                    }else{
+                        document.getElementById('Endereco1').readOnly = false;
+                    }
+                    document.getElementById('Endereco1').value = data.logradouro;
+                    
+
+                    document.getElementById('Cidade').value = data.localidade;
+                    document.getElementById('Cidade').readOnly = true;
+
+                    document.getElementById('Estado').value = data.uf;
+                    document.getElementById('Estado').readOnly = true;
+
+                    document.getElementById('Cep').value = data.cep;
+
+                } else {
+                    alert('CEP não encontrado.');
+                    document.getElementById('Endereco1').value = "";
+                    document.getElementById('Endereco1').readOnly = false;
+
+                    document.getElementById('Cidade').value = "";
+                    document.getElementById('Cidade').readOnly = false;
+
+                    document.getElementById('Estado').value = "";
+                    document.getElementById('Estado').readOnly = false;
+
+                    document.getElementById('Cep').value = "";
+                }
+            })
+            .catch(function (error) {
+                console.log('Erro ao buscar o CEP:', error);
+            });
+    }
+
+</script>
+
+<form asp-action="Checkout" method="post" class="form-horizontal" role="form" onkeydown="return event.key != 'Enter';">
     <div class="row">
         <div class="form-group col-md-6">
             <label asp-for="Nome" class="control-label"></label>
@@ -16,6 +69,23 @@
         </div>
     </div>
     <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="Cep" class="control-label"></label>
+            <input asp-for="Cep" class="form-control" onblur="cep(this.value)" />
+            <span asp-validation-for="Cep" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Cidade" class="control-label"></label>
+            <input asp-for="Cidade" class="form-control" />
+            <span asp-validation-for="Cidade" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Estado" class="control-label"></label>
+            <input asp-for="Estado" class="form-control" />
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
         <div class="form-group col-md-6">
             <label asp-for="Endereco1" class="control-label"></label>
             <input asp-for="Endereco1" class="form-control" />
@@ -25,23 +95,6 @@
             <label asp-for="Endereco2" class="control-label"></label>
             <input asp-for="Endereco2" class="form-control" />
             <span asp-validation-for="Endereco2" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-4">
-            <label asp-for="Cep" class="control-label"></label>
-            <input asp-for="Cep" class="form-control" />
-            <span asp-validation-for="Cep" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label asp-for="Cidade" class="control-label"></label>
-            <input asp-for="Cidade" class="form-control"  />
-            <span asp-validation-for="Cidade" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label asp-for="Estado" class="control-label"></label>
-            <input asp-for="Estado" class="form-control"  />
-            <span asp-validation-for="Estado" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
