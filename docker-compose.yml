@@ -5,9 +5,38 @@ version: '3.4'
 services:
   lanchesmac:
     image: lanchesmac
+    environment:
+     - LANG=pt_BR.UTF-8
+     - LC_ALL=pt_BR.UTF-8
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
       - 8080:80
-      
+    depends_on:
+      sql:
+        condition: service_healthy
+
+  sql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports: 
+      - 1433:1433
+    restart: always
+    environment:
+      - ACCEPT_EULA=y
+      - MSSQL_SA_PASSWORD=Peixoto@2019
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/opt/mssql-tools/bin/sqlcmd",
+          "-U",
+          "SA",
+          "-P",
+          "Peixoto@2019",
+          "-Q",
+          "SELECT 1"
+        ]
+      interval: 10s
+      timeout: 30s
+      retries: 5
