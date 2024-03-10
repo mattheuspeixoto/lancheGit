@@ -20,7 +20,7 @@ public class AccountController : Controller{
         });
     }
 
-[HttpPost]
+    [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel loginVM){
         
         // Testa se os campos foram preenchidos
@@ -48,5 +48,25 @@ public class AccountController : Controller{
         }
         ModelState.AddModelError("","Falha ao Realizar Login");
         return View(loginVM);  // Retorna para a Pagina de login
+    }
+
+    public IActionResult Register(){
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(LoginViewModel registroVM){
+        if (ModelState.IsValid){
+            var user = new IdentityUser { UserName = registroVM.UserName };
+            var result = await _userManager.CreateAsync(user, registroVM.Password);
+            if (result.Succeeded){
+                return RedirectToAction("Login", "Account");
+            }
+            else{
+                this.ModelState.AddModelError("Registro", "Falha ao registrar o Usuario");
+            }
+        }
+        return View(registroVM);
     }
 }
