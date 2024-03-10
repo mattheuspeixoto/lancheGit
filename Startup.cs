@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using LanchesMac.Repository;
 using LanchesMac.Repository.Interface;
 using LanchesMac.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace LanchesMac;
 public class Startup
@@ -17,6 +18,9 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddIdentity<IdentityUser,IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
         services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         services.AddTransient<ILanchesRepository,LancheRepository>();
         services.AddTransient<ICategoriaRepository,CategoriaRepository>();
@@ -46,7 +50,7 @@ public class Startup
 
         app.UseRouting();
         app.UseSession();
-
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
