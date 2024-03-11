@@ -22,7 +22,7 @@ public class AccountController : Controller{
 
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel loginVM){
-        
+
         // Testa se os campos foram preenchidos
         if (!ModelState.IsValid){
             return View(loginVM);
@@ -68,5 +68,13 @@ public class AccountController : Controller{
             }
         }
         return View(registroVM);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Logout(){
+        HttpContext.Session.Clear();
+        HttpContext.User =null;
+        await _siginManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }
