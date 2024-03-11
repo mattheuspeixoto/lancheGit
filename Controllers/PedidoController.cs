@@ -1,5 +1,6 @@
 using LanchesMac.Models;
 using LanchesMac.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanchesMac.Controllers;
@@ -14,12 +15,13 @@ public class PedidoController : Controller{
         _carrinhoCompra = carrinhoCompra;
     }
 
+    [Authorize]
     [HttpGet]
     public IActionResult Checkout(){
-        
         return View();
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Checkout(Pedido pedido){
         int totalItensPedido = 0;
