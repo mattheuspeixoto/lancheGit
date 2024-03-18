@@ -4,6 +4,7 @@ using LanchesMac.Repository;
 using LanchesMac.Repository.Interface;
 using LanchesMac.Models;
 using Microsoft.AspNetCore.Identity;
+using LanchesMac.Services;
 
 namespace LanchesMac;
 public class Startup{
@@ -33,6 +34,15 @@ public class Startup{
         services.AddTransient<ICategoriaRepository,CategoriaRepository>();
         services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
         services.AddTransient<IPedidosRepository,PedidosRepository>();
+        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+        // Registra a Politica de Perfis 
+        services.AddAuthorization(options => {
+            options.AddPolicy("Admin",
+                politica => {
+                    politica.RequireRole("Admin");
+                });
+        });
         services.AddScoped(sp=> CarrinhoCompra.GetCarrinho(sp));
         services.AddControllersWithViews();
         services.AddMemoryCache();
@@ -40,7 +50,7 @@ public class Startup{
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context){
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context, ISeedUserRoleInitial seedUserRoleInitial) {
         context.Database.Migrate();
         if (env.IsDevelopment()){
             app.UseDeveloperExceptionPage();
@@ -54,6 +64,12 @@ public class Startup{
         app.UseStaticFiles();
 
         app.UseRouting();
+
+        //Cria os perfis
+        seedUserRoleInitial.SeedRoles();
+
+        //Cria os Usuarios e coloca-os nos perfis
+        seedUserRoleInitial.SeedUsers();
         app.UseSession();
         app.UseAuthentication();
         app.UseAuthorization();
