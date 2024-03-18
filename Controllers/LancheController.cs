@@ -14,11 +14,6 @@ namespace LanchesMac.Controllers {
 
         public IActionResult List(string categoria) {
             ViewData["Data"] = DateTime.Now.ToShortDateString();
-            var lanche = _lancheRepository.Lanches;
-            var totallanches = lanche.Count();
-
-            ViewBag.total = "Total de Lanches: ";
-            ViewBag.totallanhces = totallanches;
             IEnumerable<Lanche> lanches;
             string categoriaAtual = string.Empty;
             if (string.IsNullOrWhiteSpace(categoria)){
@@ -33,6 +28,9 @@ namespace LanchesMac.Controllers {
                 .OrderBy(l=> l.Nome);
             }
 
+            var totallanches = lanches.Count();
+            ViewBag.total = "Total de Lanches: ";
+            ViewBag.totallanhces = totallanches;
             // Puxa a lista de Lanches e passa para a View (Lanche/List.cshtml)
             var lancheListViewModel = new LancheListViewModel();
             lancheListViewModel.lanches = lanches;
