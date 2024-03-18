@@ -61,6 +61,7 @@ public class AccountController : Controller{
             var user = new IdentityUser { UserName = registroVM.UserName };
             var result = await _userManager.CreateAsync(user, registroVM.Password);
             if (result.Succeeded){
+                await _userManager.AddToRoleAsync(user, "Member");
                 return RedirectToAction("Login", "Account");
             }
             else{
