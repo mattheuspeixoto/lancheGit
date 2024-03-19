@@ -6,12 +6,18 @@
 
 <h1>Pedidos</h1>
 <form method="get" class="form-inline">
-    <input name="filter" class="form-control" placeholder="Pesquisar" value="@Model.RouteValue["Filter"]"/>
-    <button type="submit" class="btn btn-info">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
-    </button>
+        <div class="row">
+                <div class="col-md-6">
+                        <input name="filter" class="form-control" placeholder="Pesquisar"value="@Model.RouteValue["Filter"]" />
+                </div>
+                <div class="col-md-6">
+                        <button type="submit" class="btn btn-success">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
+                        </button>
+                </div>
+        </div>
 </form>
-
+<br>
 Total de Pedidos: @Model.TotalRecordCount
 
 <p>
@@ -96,7 +102,8 @@ Total de Pedidos: @Model.TotalRecordCount
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.PedidoId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.PedidoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PedidoId">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.PedidoId">Delete</a> |
+                    <a asp-action="PedidoLanches" asp-route-id="@item.PedidoId">Ver Itens</a>
                 </td>
             </tr>
     }

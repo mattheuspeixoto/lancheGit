@@ -28,7 +28,7 @@ namespace LanchesMac.Areas.Admin.Controllers {
         */
         public async Task<IActionResult> Index(String filter, int pageindex = 1, string sort = "Nome")
         {
-            var resultado = _context.Lanches.AsNoTracking().AsQueryable();
+            var resultado = _context.Lanches.Include(l => l.Categoria).AsNoTracking().AsQueryable();
             if (!string.IsNullOrWhiteSpace(filter))
             {
                 resultado = resultado.Where(p => p.Nome.Contains(filter));
