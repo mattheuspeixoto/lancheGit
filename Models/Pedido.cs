@@ -56,6 +56,7 @@ namespace LanchesMac.Models
         [Display(Name = "Itens no Pedido")]
         public int TotalItensPedido { get; set; }
 
+        [Required(ErrorMessage = "Informe a Data do Pedido")]
         [Display(Name = "Data do Pedido")]
         [DataType(DataType.Text)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy hh:mm}", ApplyFormatInEditMode = true)]
