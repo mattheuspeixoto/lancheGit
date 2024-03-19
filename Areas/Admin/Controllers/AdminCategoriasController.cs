@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using LanchesMac.Context;
 using LanchesMac.Models;
 using Microsoft.AspNetCore.Authorization;
+using ReflectionIT.Mvc.Paging;
 
 namespace LanchesMac.Areas.Admin.Controllers {
     [Area("Admin")]
@@ -15,8 +16,22 @@ namespace LanchesMac.Areas.Admin.Controllers {
         }
 
         // GET: Admin/AdminCategorias
+        /*
         public async Task<IActionResult> Index() {
             return View(await _context.Categorias.ToListAsync());
+        }
+        */
+         public async Task<IActionResult> Index(String filter, int pageindex = 1, string sort = "CategoriaNome")
+        {
+            var resultado = _context.Categorias.AsNoTracking().AsQueryable();
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                resultado = resultado.Where(p => p.CategoriaNome.Contains(filter));
+            }
+            var model = await PagingList.CreateAsync(resultado, 3, pageindex, sort, "CategoriaNome");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+
+            return View(model);
         }
 
         // GET: Admin/AdminCategorias/Details/5
