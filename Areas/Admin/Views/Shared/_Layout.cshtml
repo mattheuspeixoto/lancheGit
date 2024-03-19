@@ -7,6 +7,78 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+<script>
+    function cep(valor) {
+        var cep = valor.replace(/\D/g, '');
+
+        if (cep.length !== 8) {
+            alert("Cep Inválido");
+            
+            document.getElementById('Endereco1').value = "";
+            document.getElementById('Endereco1').readOnly = false; 
+
+            document.getElementById('Cidade').value = "";
+            document.getElementById('Cidade').readOnly = false;
+
+            document.getElementById('Estado').value = "";
+            document.getElementById('Estado').readOnly = false;
+
+            document.getElementById('Cep').value = "";
+            return;
+        }
+
+        fetch('https://viacep.com.br/ws/' + cep + '/json/')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                
+                if (!data.erro) {                 
+                  
+                    document.getElementById('Endereco1').value = data.logradouro;
+                    document.getElementById('Cidade').value = data.localidade;
+                    document.getElementById('Estado').value = data.uf;
+                    document.getElementById('Cep').value = data.cep;
+                    
+                    if (data.logradouro != "") {
+                        document.getElementById('Endereco1').readOnly = true;
+                    }else{
+                        document.getElementById('Endereco1').readOnly = false;
+                    }
+                    
+                    if (data.localidade != "") {
+                        document.getElementById('Cidade').readOnly = true;
+                    }else{
+                        document.getElementById('Cidade').readOnly = false;
+                    }   
+
+                    if (data.uf != "") {
+                        document.getElementById('Estado').readOnly = true;
+                    }else{
+                        document.getElementById('Estado').readOnly = false;
+                    }
+
+
+                } else {
+                    alert('CEP não encontrado.');
+                    document.getElementById('Endereco1').value = "";
+                    document.getElementById('Endereco1').readOnly = false;
+
+                    document.getElementById('Cidade').value = "";
+                    document.getElementById('Cidade').readOnly = false;
+
+                    document.getElementById('Estado').value = "";
+                    document.getElementById('Estado').readOnly = false;
+
+                    document.getElementById('Cep').value = "";
+                }
+            })
+            .catch(function (error) {
+                console.log('Erro ao buscar o CEP:', error);
+            });
+    }
+
+</script>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
