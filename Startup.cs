@@ -6,6 +6,7 @@ using LanchesMac.Models;
 using Microsoft.AspNetCore.Identity;
 using LanchesMac.Services;
 using ReflectionIT.Mvc.Paging;
+using LanchesMac.Areas.Admin.Servicos;
 
 namespace LanchesMac;
 public class Startup{
@@ -36,6 +37,7 @@ public class Startup{
         services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
         services.AddTransient<IPedidosRepository,PedidosRepository>();
         services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+        services.AddScoped<RelatorioVendasService>();
 
         // Registra a Politica de Perfis 
         services.AddAuthorization(options => {
