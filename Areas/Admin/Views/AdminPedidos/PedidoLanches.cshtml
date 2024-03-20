@@ -14,19 +14,33 @@
 <h4><b>Entrega:</b> @Html.DisplayFor(model => model.pedido.PedidoEntregueEm)</h4>
 
 <table class="table">
+    <tr>
+            <td align="center">
+                <h3><b>Lanche</b></h3>
+            </td>
+            <td align="right">
+                
+            </td>
+            <td align="center">
+                <h3><b>Preço</b></h3>
+            </td>
+            <td align="center">
+                <h3><b>Quantidade</b></h3>
+            </td>
+        </tr>
     @foreach (var item in @Model.pedido.PedidoItens) {
         totalpedido += (item.Lanche.Preco * item.Quantidade);
         <tr>
-            <td align="right">
+            <td align="center">
                 <h3>@Html.DisplayFor(modelitem => item.Lanche.Nome)</h3>
             </td>
-            <td align="right">
+            <td align="center">
                 <img src="@item.Lanche.ImagemUrl" class="img-fluid" height="100" width="100" />
             </td>
-            <td align="right">
+            <td align="center">
                 <h3>@string.Format("{0:C}", item.Lanche.Preco)</h3>
             </td>
-            <td align="right">
+            <td align="center">
                 <h3>@Html.DisplayFor(modelitem => item.Quantidade)</h3>
             </td>
         </tr>
@@ -34,7 +48,7 @@
     <tr>
         <td colspan="2">&nbsp;</td>
         <td align="right">
-            <h3>Total Pedido:@string.Format("{0:C}", totalpedido)</h3>
+            <h3><b>Total Pedido:</b>  @string.Format("{0:C}", totalpedido)</h3>
         </td>
     </tr>
 
