@@ -1,23 +1,26 @@
-﻿<div class="row">
+﻿
+<div class="row justify-content-center">
     <div class="col-md-6">
         <form class="form-horizontal" asp-action="RelatorioVendasSimples">
             <fieldset>
-                <legend><b>Relatório de Pedidos por Período</b></legend>
-                <div class="form-group">
-                    <label for="minDate" class="col-lg-6 control-label">Data Inicial</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="minDate" class="form-control" />
-                    </div>
+                <div style="text-align:center">
+                    <h4>
+                        <b>Relatório de Pedidos por Período</b>
+                    </h4>
                 </div>
-                <div class="form-group">
-                    <label for="maxDate" class="col-lg-6 control-label">Data Final</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="maxDate" class="form-control" />
+
+                <div class="row">
+                    <div class="col-lg-5 text-center">
+                        <label for="minDate">Data Inicial</label>
+                        <input type="date" class="form-control" name="minDate" value=@ViewData["minDate"] />
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    <div class="col-lg-5 text-center">
+                        <label for="maxDate">Data Final</label>
+                        <input type="date" class="form-control" name="maxDate" value=@ViewData["maxDate"] />
+                    </div>
+                    <div class="col-lg-2" style="text-align:center">
+                        <br />
+                        <button type="submit" class="btn btn-success">Filtrar</button>
                     </div>
                 </div>
             </fieldset>
