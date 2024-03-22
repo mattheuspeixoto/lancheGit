@@ -8,6 +8,7 @@ services:
     environment:
      - LANG=pt_BR.UTF-8
      - LC_ALL=pt_BR.UTF-8
+     - DB_SERVER= sql
     build:
       context: .
       dockerfile: ./Dockerfile
