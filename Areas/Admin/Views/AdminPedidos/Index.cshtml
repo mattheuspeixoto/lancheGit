@@ -4,112 +4,168 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Pedidos</h1>
+<h1 style="text-align: center;">Pedidos</h1>
+@* <p> <a asp-action="Create">Criar Novo Pedido</a> <p> *@
 <form method="get" class="form-inline">
-        <div class="row">
-                <div class="col-md-6">
-                        <input name="filter" class="form-control" placeholder="Pesquisar"value="@Model.RouteValue["Filter"]" />
-                </div>
-                <div class="col-md-6">
-                        <button type="submit" class="btn btn-success">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
-                        </button>
-                </div>
-        </div>
+    <div class="input-group">
+        <input name="filter" class="form-control" placeholder="Pesquisar" value="@Model.RouteValue["Filter"]" />
+        <span class="input-group-btn" style="margin-left: 5px;">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
+            </button>
+        </span>
+    </div>
 </form>
 <br>
-Total de Pedidos: @Model.TotalRecordCount
+    Total de Pedidos: @Model.TotalRecordCount
+<br>
 
-<p>
-    <a asp-action="Create">Criar Novo Pedido</a>
-</p>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sobrenome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco1)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco2)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cep)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cidade)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Telefone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PedidoEnviado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PedidoEntregueEm)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sobrenome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endereco1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endereco2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cep)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PedidoEnviado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PedidoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PedidoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PedidoId">Delete</a> |
-                    <a asp-action="PedidoLanches" asp-route-id="@item.PedidoId">Ver Itens</a>
-                </td>
-            </tr>
+
+@*
+    <div class="table-responsive d-none d-md-block">
+    <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Nome)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Sobrenome)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Endereco1)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Endereco2)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Cep)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Estado)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Cidade)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Email)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.Telefone)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.PedidoEnviado)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.PedidoEntregueEm)</th>
+    <th style="text-align:center;">@Html.DisplayNameFor(modelItem => modelItem.PedidoTotal)</th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Nome)</td>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Sobrenome)</td>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Endereco1)</td>
+    <td style="text-align:center;">
+    @if (item.Endereco2 != null)
+    {
+    @Html.DisplayFor(modelitem => item.Endereco2)
     }
-        </tbody>
+    else
+    {
+    @Html.Raw("-")
+    }
+    </td>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Cep)</td>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Estado)</td>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Cidade)</td>
+    <td style="text-align:center;text-decoration: none; color: inherit;">@item.Email</td>
+    <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Telefone)</td>
+    <td style="text-align:center;">@item.PedidoEnviado.ToShortDateString()</td>
+    <td style="text-align:center;">
+    @if (item.PedidoEntregueEm != null)
+    {
+    @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
+    }
+    else
+    {
+    @Html.Raw("-")
+    }
+    </td>
+    <td style="text-align:center;">
+    @if (item.PedidoItens != null)
+    {
+    @item.PedidoItens.Sum(L => L.Lanche.Preco).ToString("c")
+    }
+    else
+    {
+    0.ToString("c");
+    }
+    </td>
+    <td style="text-align:center;">
+    <a asp-action="PedidoLanches" asp-route-id="@item.PedidoId" class="btn-outline-info">Ver Itens</a>
+    <a asp-action="Edit" asp-route-id="@item.PedidoId" class="btn-outline-warning">Editar</a>
+    <a asp-action="Details" asp-route-id="@item.PedidoId" class="btn-outline-success">Detalhes</a>
+    <a asp-action="Delete" asp-route-id="@item.PedidoId" class="btn-outline-danger">Deletar</a>
+    </td>
+    </tr>
+    }
+    </tbody>
     </table>
-</div>
-<div style="position: fixed; right: 0; margin-right:10px" >
-    <vc:pager paging-list="@Model"></vc:pager>
+    </div> *@
+<div class="table-pagination-container" style="position: relative;">
+    <div class="table-responsive d-none d-md-block">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark no-border">
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Pedido Enviado</th>
+                    <th>Pedido Entregue Em</th>
+                    <th>Total do Pedido</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PedidoId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Sobrenome)</td>
+                        <td>@item.PedidoEnviado.ToShortDateString()</td>
+                        <td>@(item.PedidoEntregueEm != null ? Html.DisplayFor(modelItem => item.PedidoEntregueEm) : "-")</td>
+                        <td>@(item.PedidoItens != null ? item.PedidoItens.Sum(L => L.Lanche.Preco).ToString("c") : "R$ 0,00")</td>
+                        <td>
+                            <div class="btn-group d-flex flex-column flex-sm-row" role="group" aria-label="Opções">
+                                <a style="padding-right:2%;" asp-action="PedidoLanches" asp-route-id="@item.PedidoId" class="btn-outline-info" title="Ver Itens">Ver Itens</a>
+                                <a style="padding-right:2%;" asp-action="Edit" asp-route-id="@item.PedidoId" class="btn-outline-warning" title="Editar">Editar</a>
+                                <a style="padding-right:2%;" asp-action="Details" asp-route-id="@item.PedidoId" class="btn-outline-success" title="Detalhes">Detalhes</a>
+                                <a style="padding-right:2%;" asp-action="Delete" asp-route-id="@item.PedidoId" class="btn-outline-danger" title="Deletar">Deletar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Cards para telas menores -->
+    <div class="row d-md-none">
+        @foreach (var item in Model) {
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Nome:</strong> @Html.DisplayFor(modelItem => item.Nome)</p>
+                        <p class="card-text"><strong>Sobrenome:</strong> @Html.DisplayFor(modelItem => item.Sobrenome)</p>
+                        <p class="card-text"><strong>Data Pedido:</strong> @item.PedidoEnviado.ToShortDateString()</p>
+                        <p class="card-text">
+                            <strong>Data Entrega:</strong> @if (item.PedidoEntregueEm != null) {
+                                @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
+                            } else {
+                                @Html.Raw("-")
+                            }
+                        </p>
+                        <p class="card-text">
+                            <strong>Pedido Total:</strong> @if (item.PedidoItens != null) {
+                                @item.PedidoItens.Sum(L => L.Lanche.Preco).ToString("c")
+                            } else { 0.ToString("c"); }
+                        </p>
+                        <div class="btn-group" role="group">
+                            <a style="margin-right:2%;" asp-action="PedidoLanches" asp-route-id="@item.PedidoId" class="btn-outline-info">Ver Itens</a>
+                            <a style="margin-right:2%;" asp-action="Edit" asp-route-id="@item.PedidoId" class="btn-outline-warning">Editar</a>
+                            <a style="margin-right:2%;" asp-action="Details" asp-route-id="@item.PedidoId" class="btn-outline-success">Detalhes</a>
+                            <a style="margin-right:2%;" asp-action="Delete" asp-route-id="@item.PedidoId" class="btn-outline-danger">Deletar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="pagination" style="position:absolute; right: 0;">
+        <vc:pager paging-list="@Model"></vc:pager>
+    </div>
 </div>

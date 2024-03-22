@@ -26,11 +26,18 @@ namespace LanchesMac.Areas.Admin.Controllers {
         }
         */
         public async Task<IActionResult> Index(String filter, int pageindex = 1, string sort = "Nome") {
-            var resultado = _context.Pedidos.AsNoTracking().AsQueryable();
+            var resultado = _context.Pedidos.Include(l => l.PedidoItens).ThenInclude(l => l.Lanche).AsNoTracking().AsQueryable();
             if (!string.IsNullOrWhiteSpace(filter)) {
                 resultado = resultado.Where(p => p.Nome.Contains(filter));
             }
-            var model = await PagingList.CreateAsync(resultado, 3, pageindex, sort, "Nome");
+            var userAgent = Request.Headers["User-Agent"].ToString();
+            bool isMobileDevice = userAgent.Contains("Mobi");
+
+            int pageSize = 10;
+            if (isMobileDevice) {
+                pageSize = 5; // Defina o número de registros por página para dispositivos móveis
+            }
+            var model = await PagingList.CreateAsync(resultado, pageSize, pageindex, sort, "Nome");
             model.RouteValue = new RouteValueDictionary { { "filter", filter } };
 
             return View(model);

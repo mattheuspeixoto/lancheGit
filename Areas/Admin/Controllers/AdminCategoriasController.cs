@@ -28,7 +28,14 @@ namespace LanchesMac.Areas.Admin.Controllers {
             {
                 resultado = resultado.Where(p => p.CategoriaNome.Contains(filter));
             }
-            var model = await PagingList.CreateAsync(resultado, 3, pageindex, sort, "CategoriaNome");
+            var userAgent = Request.Headers["User-Agent"].ToString();
+            bool isMobileDevice = userAgent.Contains("Mobi");
+
+            int pageSize = 10;
+            if (isMobileDevice) {
+                pageSize = 5; // Defina o número de registros por página para dispositivos móveis
+            }
+            var model = await PagingList.CreateAsync(resultado, pageSize, pageindex, "CategoriaNome", "CategoriaNome");
             model.RouteValue = new RouteValueDictionary { { "filter", filter } };
 
             return View(model);

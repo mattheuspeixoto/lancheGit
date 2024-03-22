@@ -28,12 +28,37 @@ namespace LanchesMac.Areas.Admin.Controllers {
         */
         public async Task<IActionResult> Index(String filter, int pageindex = 1, string sort = "Nome")
         {
+            if (sort == null)
+            {
+                sort = "Nome";
+            }
+            if (filter == null)
+            {
+                filter = string.Empty;
+            }
+            ViewBag.SelectedSort = sort;
+            ViewBag.SortOptions = new List<SelectListItem>{
+                 new SelectListItem { Value = "Nome", Text = "Nome" },
+                 new SelectListItem { Value = "-Nome", Text = "Nome Desc" },
+                 new SelectListItem { Value = "Preco", Text = "Preço" },
+                 new SelectListItem { Value = "-Preco", Text = "Preço Desc" },
+                 new SelectListItem { Value = "CategoriaId", Text = "Categoria" },
+                 new SelectListItem { Value = "-CategoriaId", Text = "Categoria Desc" },
+            };
             var resultado = _context.Lanches.Include(l => l.Categoria).AsNoTracking().AsQueryable();
             if (!string.IsNullOrWhiteSpace(filter))
             {
                 resultado = resultado.Where(p => p.Nome.Contains(filter));
             }
-            var model = await PagingList.CreateAsync(resultado, 3, pageindex, sort, "Nome");
+            var userAgent = Request.Headers["User-Agent"].ToString();
+            bool isMobileDevice = userAgent.Contains("Mobi");
+
+            int pageSize = 10;
+            if (isMobileDevice)
+            {
+                pageSize = 5; // Defina o número de registros por página para dispositivos móveis
+            }
+            var model = await PagingList.CreateAsync(resultado, pageSize, pageindex, sort, sort.ToString());
             model.RouteValue = new RouteValueDictionary { { "filter", filter } };
 
             return View(model);
@@ -61,6 +86,7 @@ namespace LanchesMac.Areas.Admin.Controllers {
         // GET: Admin/AdminLanches/Create
         public IActionResult Create()
         {
+            ViewBag.CategoriaId = new SelectList(_context.Categorias, "CategoriaId", "CategoriaNome");
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaNome");
             return View();
         }

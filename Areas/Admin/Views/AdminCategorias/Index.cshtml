@@ -4,57 +4,59 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Categorias</h1>
-<form method="get" class="form-inline">
-        <div class="row">
-                <div class="col-md-6">
-                        <input name="filter" class="form-control" placeholder="Pesquisar" value="@Model.RouteValue["Filter"]" />
-                </div>
-                <div class="col-md-6">
-                        <button type="submit" class="btn btn-success">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
-                        </button>
-                </div>
-        </div>
-</form>
-<br>
-Total de Categorias: @Model.TotalRecordCount
-
+<h1 style="text-align: center;">Categorias</h1>
 <p>
     <a asp-action="Create">Criar Nova Categoria</a>
 </p>
+<form method="get" class="form-inline">
+    <div class="input-group">
+        <input name="filter" class="form-control" placeholder="Pesquisar" value="@Model.RouteValue["Filter"]" />
+        <span class="input-group-btn" style="margin-left: 5px;">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
+            </button>
+        </span>
+    </div>
+</form>
+<br>
+Total de Categorias: @Model.TotalRecordCount
+<br>
+<div class="table-pagination-container" style="position: relative;">
 <div class="table-responsive">
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.CategoriaNome)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
-            <th></th>
+            <th style="text-align:center"></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.CategoriaNome)
             </td>
-            <td>
+            <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
-            </td>
+            <td style="text-align:center">
+                <div class="btn-group d-flex flex-column flex-sm-row" role="group" aria-label="Opções">
+                   <a class="btn-outline-warning"  style="margin-right:5%;" asp-action="Edit" asp-route-id="@item.CategoriaId">Editar</a> 
+                   <a class="btn-outline-success"  style="margin-right:5%;" asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> 
+                   <a class="btn-outline-danger" asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
+                </div>
+            </td>         
         </tr>
 }
     </tbody>
 </table>
 </div>
-<div style="position:absolute; right: 0; margin-right:10px">
+<div style="position:absolute; right: 0;">
     <vc:pager paging-list="@Model"></vc:pager>
+</div>
 </div>
