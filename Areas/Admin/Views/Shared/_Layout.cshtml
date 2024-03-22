@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +8,59 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+<style>
+    .pagination-container {
+        margin-right: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pagination li {
+        margin: 0 5px;
+    }
+
+    .pagination li a {
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        color: #333;
+    }
+
+    .pagination li a:hover {
+        background-color: #f0f0f0;
+                    color: #333;
+    }
+
+    .panel-heading h3 {
+        background-color: #bbb;
+        /* Altere aqui para o tom de cinza mais escuro desejado */
+        /* Mantém a cor do texto inalterada */
+
+    }
+
+    .page-item.active .page-link {
+        /* Adicione :selected se aplicável */
+        background-color: gray;
+        border-color: gray;
+        /* Cor de fundo mais suave */
+    }
+</style>
 <script>
     function cep(valor) {
         var cep = valor.replace(/\D/g, '');
 
         if (cep.length !== 8) {
             alert("Cep Inválido");
-            
+
             document.getElementById('Endereco1').value = "";
             document.getElementById('Endereco1').readOnly = false; 
 
@@ -50,8 +97,7 @@
                         document.getElementById('Cidade').readOnly = true;
                     }else{
                         document.getElementById('Cidade').readOnly = false;
-                    }   
-
+                    }
                     if (data.uf != "") {
                         document.getElementById('Estado').readOnly = true;
                     }else{
@@ -81,28 +127,68 @@
 </script>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin</a>
-                @* <div class="navbar-collapse collapse d-sm-inline-flex"> *@
-                    <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminLanches" asp-action="Index">Produtos</a>
-                    <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminCategorias" asp-action="Index">Categorias</a>
-                    <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminPedidos" asp-action="Index">Pedidos</a>
-                    <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminRelatorioVendas" asp-action="Index">Relatório Vendas</a>
-                @* </div> *@
-            </div>
-        </nav>
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+        <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin</a>
+        <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminLanches"asp-action="Index">Produtos</a>
+        <a class="nav-link text-light" asp-area="Admin"
+        asp-controller="AdminCategorias"asp-action="Index">Categorias</a>
+        <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminPedidos"asp-action="Index">Pedidos</a>
+        <a class="nav-link text-light" asp-area="Admin"
+        asp-controller="AdminRelatorioVendas"asp-action="Index">Relatório Vendas</a>
+        <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminImagens"asp-action="Index">Gerenciar
+        Imagens</a>
+        </div>
+        </nav> *@
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="AdminLanches" asp-action="Index">
+                        <i class="fas fa-cookie"></i> Produtos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="AdminCategorias" asp-action="Index">
+                        <i class="fas fa-tags"></i> Categorias
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="AdminPedidos" asp-action="Index">
+                        <i class="fas fa-shopping-cart"></i> Pedidos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="AdminRelatorioVendas" asp-action="Index">
+                        <i class="fas fa-chart-line"></i> Relatório Vendas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="AdminImagens" asp-action="Index">
+                        <i class="fas fa-image"></i> Gerenciar Imagens
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
-        @* <div class="container">
-            <p><a target="_blank" href="http://www.macoratti.net">&copy; 2021 - Macoratti.net</a></p>
-        </div> *@
-    </footer>
+    @* <footer class="border-top footer text-muted">
+         <div class="container">
+        <p><a target="_blank" href="http://www.macoratti.net">&copy; 2021 - Macoratti.net</a></p>
+        </div> 
+    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

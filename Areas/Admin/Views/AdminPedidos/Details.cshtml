@@ -4,81 +4,163 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Pedido</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sobrenome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sobrenome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Endereco1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Endereco2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PedidoEnviado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PedidoEnviado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PedidoEntregueEm)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PedidoEntregueEm)
-        </dd>
-    </dl>
+<h1 style="text-align: center;">Detalhes do Pedido</h1>
+@* <div class="container">
+<hr />
+<div class="row">
+<div class="col-md-6">
+<dl class="row">
+<dt class="col-sm-4">Nome:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
+<dt class="col-sm-4">Sobrenome:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Sobrenome)</dd>
+<dt class="col-sm-4">Endereço 1:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Endereco1)</dd>
+<dt class="col-sm-4">@Html.DisplayNameFor(model=> model.Endereco2)</dt>
+<dd class="col-sm-8">@if (Model.Endereco2 != null) { @Html.DisplayFor(modelItem => modelItem.Endereco2) } else {
+@Html.Raw("-") }</dd>
+</dl>
 </div>
+<div class="col-md-6">
+<dl class="row">
+<dt class="col-sm-4">CEP:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Cep)</dd>
+<dt class="col-sm-4">Estado:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
+<dt class="col-sm-4">Cidade:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Cidade)</dd>
+<dt class="col-sm-4">Telefone:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Telefone)</dd>
+<dt class="col-sm-4">Email:</dt>
+<dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+<dt class="col-sm-4">Pedido Enviado:</dt>
+<dd class="col-sm-8">@Model.PedidoEnviado.ToString("dd/MM/yyyy")</dd>
+<dt class="col-sm-4">Pedido Entregue Em:</dt>
+<dd class="col-sm-8">@if (Model.PedidoEntregueEm != null) { @Html.DisplayFor(modelItem => modelItem.PedidoEntregueEm) }
+else { @Html.Raw("-") }</dd>
+</dl>
+</div>
+</div>
+</div> *@
+
+<div class="container">
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">Informações Pessoais</h5>
+                        <br />
+                    <dl class="row">
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Nome)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Nome)</dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Sobrenome)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Sobrenome)
+                            </dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Endereco1)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Endereco1)
+                            </dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-5 col-sm-5 col-xs-5 col-lg-5" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Endereco2)</dt>
+                            <dd class="col-md-7 col-sm-7 col-xs-7 col-lg-7">@if (Model.Endereco2 != null)
+                                {
+                                    @Html.DisplayFor(modelItem =>
+                                             modelItem.Endereco2)
+                                }
+                                else
+                                {
+                                    @Html.Raw("-")
+                                }</dd>
+                        </dl>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align:center">Informações de Contato</h5>
+                        <br />
+                    <dl class="row">
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Cep)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Cep)</dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Estado)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Estado)</dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Cidade)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Cidade)</dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.Telefone)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Html.DisplayFor(model => model.Telefone)
+                            </dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">@Html.DisplayNameFor(model => model.Email)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8"style="text-decoration: none; color: inherit;">
+                                <a href="mailto:@Model.Email" style="text-decoration: none; color: inherit;">
+                                    @Model.Email
+                                </a>
+                            </dd>
+
+                        </dl>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align:center">Informações do Pedido</h5>
+                        <br />
+                    <dl class="row">
+                        <dl class="input-group">
+                            <dt class="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.PedidoEnviado)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@Model.PedidoEnviado.ToString("dd/MM/yyyy")
+                            </dd>
+                        </dl>
+                        <dl class="input-group">
+                            <dt cclass="col-md-4 col-sm-4 col-xs-4 col-lg-4" style="padding-right:1%;">
+                                @Html.DisplayNameFor(model => model.PedidoEntregueEm)</dt>
+                            <dd class="col-md-8 col-sm-8 col-xs-8 col-lg-8">@if (Model.PedidoEntregueEm != null)
+                                {
+                                    @Html.DisplayFor(modelItem =>
+                                             modelItem.PedidoEntregueEm)
+                                }
+                                else
+                                {
+                                    @Html.Raw("-")
+                                }
+                            </dd>
+                        </dl>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PedidoId">Edit</a> |
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.PedidoId">Editar</a> 
     <a class="btn btn-outline-info" asp-action="Index">Voltar</a>
+    <a asp-action="PedidoLanches" asp-route-id="@Model.PedidoId" class="btn btn-secondary" title="Ver Itens">Ver Itens</a>
 </div>

@@ -6,53 +6,154 @@
 }
 
 <h1 style="text-align:center">Lanches do Pedido</h1>
-<hr />
+@* <div class="panel-body">
+<div class="row">
+<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+<div class="panel panel-default">
+<div class="panel-heading bg-light">
+<h3 class="panel-title text-center">Pedidos</h3>
+</div>
+<div class="panel-body text-center">
+<h4>@Model.pedido.PedidoId</h4>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+<div class="panel panel-default">
+<div class="panel-heading bg-light">
+<h3 class="panel-title text-center">Nome</h3>
+</div>
+<div class="panel-body text-center">
+<h4>@Model.pedido.Nome</h4>
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+<div class="panel panel-default">
+<div class="panel-heading bg-light">
+<h3 class="panel-title text-center">Data Pedido</h3>
+</div>
+<div class="panel-body text-center">
+<h4>@Model.pedido.PedidoEnviado.ToString("dd/MM/yyyy")</h4>
+</div>
+</div>
+</div>
+</div>
+</div> *@
 
-<h4><b>Pedido:</b> @Html.DisplayFor(model => model.pedido.PedidoId)</h4>
+@* <h4><b>Pedido:</b> @Html.DisplayFor(model => model.pedido.PedidoId)</h4>
 <h4><b>Cliente:</b> @Html.DisplayFor(model => model.pedido.Nome)</h4>
-<h4><b>Data:</b> @Html.DisplayFor(model => model.pedido.PedidoEnviado)</h4>
-<h4><b>Entrega:</b> @Html.DisplayFor(model => model.pedido.PedidoEntregueEm)</h4>
+<h4><b>Data:</b> @Model.pedido.PedidoEnviado.ToShortDateString()</h4>
+<h4><b>Entrega:</b> @Html.DisplayFor(model => model.pedido.PedidoEntregueEm)</h4> *@
 
-<table class="table">
-    <tr>
-            <td align="center">
-                <h3><b>Lanche</b></h3>
-            </td>
-            <td align="right">
-                
-            </td>
-            <td align="center">
-                <h3><b>Preço</b></h3>
-            </td>
-            <td align="center">
-                <h3><b>Quantidade</b></h3>
-            </td>
-        </tr>
-    @foreach (var item in @Model.pedido.PedidoItens) {
-        totalpedido += (item.Lanche.Preco * item.Quantidade);
-        <tr>
-            <td align="center">
-                <h3>@Html.DisplayFor(modelitem => item.Lanche.Nome)</h3>
-            </td>
-            <td align="center">
-                <img src="@item.Lanche.ImagemUrl" class="img-fluid" height="100" width="100" />
-            </td>
-            <td align="center">
-                <h3>@string.Format("{0:C}", item.Lanche.Preco)</h3>
-            </td>
-            <td align="center">
-                <h3>@Html.DisplayFor(modelitem => item.Quantidade)</h3>
-            </td>
-        </tr>
-    }
-    <tr>
-        <td colspan="2">&nbsp;</td>
-        <td align="right">
-            <h3><b>Total Pedido:</b>  @string.Format("{0:C}", totalpedido)</h3>
-        </td>
-    </tr>
 
-</table>
 
-<a asp-action="Index" class="btn btn-outline-info">Retornar</a>
+<div class="container">
+    <hr />
+    <div class="row">
+        <div class="col-md-6 col-sm-12 order-md-1 order-sm-1">
+            <h4><b>Pedido:</b> @Model.pedido.PedidoId</h4>
+        </div>
+        <div class="col-md-6 col-sm-12 order-md-2 order-sm-2">
+            <h4><b>Cliente:</b> @Html.DisplayFor(model => model.pedido.Nome)</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 order-md-3 order-sm-4">
+            <h4><b>Data:</b> @Model.pedido.PedidoEnviado.ToShortDateString()</h4>
+        </div>
+        <div class="col-md-6 col-sm-12 order-md-4 order-sm-3">
+            <h4><b>Entrega:</b> @Html.DisplayFor(model => model.pedido.PedidoEntregueEm)</h4>
+        </div>
+    </div>
+</div>
+<br>
 
+<br>
+
+<div class="container">
+    <hr />
+    <div class="row d-none d-md-flex">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <td align="center">
+                        <h3><b>Lanche</b></h3>
+                    </td>
+                    <td align="center">
+                    </td>
+                    <td align="center">
+                        <h3><b>Preço</b></h3>
+                    </td>
+                    <td align="center">
+                        <h3><b>Quantidade</b></h3>
+                    </td>
+                </tr>
+                @foreach (var item in @Model.pedido.PedidoItens)
+                {
+                    totalpedido += (item.Lanche.Preco * item.Quantidade);
+                    <tr>
+                        <td align="center">
+                            <h3>@Html.DisplayFor(modelitem => item.Lanche.Nome)</h3>
+                        </td>
+                        <td align="center">
+                            <img src="@item.Lanche.ImagemUrl" class="img-fluid" height="100" width="100" />
+                        </td>
+                        <td align="center">
+                            <h3>@string.Format("{0:C}", item.Lanche.Preco)</h3>
+                        </td>
+                        <td align="center">
+                            <h3>@Html.DisplayFor(modelitem => item.Quantidade)</h3>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td align="center">
+                        <h3><b>Total Pedido:</b> @string.Format("{0:C}", totalpedido)</h3>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row d-md-none">
+        @foreach (var item in @Model.pedido.PedidoItens)
+        {
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="@item.Lanche.ImagemUrl" class="img-fluid mb-3" height="100" width="100" />
+                        <h5 class="card-title"><b>Lanche:</b> @Html.DisplayFor(modelitem => item.Lanche.Nome)</h5>
+                        <p class="card-text"><b>Preço:</b> @string.Format("{0:C}", item.Lanche.Preco)</p>
+                        <p class="card-text"><b>Quantidade:</b> @Html.DisplayFor(modelitem => item.Quantidade)</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row d-md-none">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><b>Total Pedido:</b> @string.Format("{0:C}", totalpedido)</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="text-center">
+    <a asp-action="Index" 
+    style="background-color:lightgray;
+    color: black;
+    border-color:lightgray;
+    text-decoration: none;
+    display: inline-block; 
+    padding: 0.5rem 1rem; 
+    border-radius: 0.25rem; 
+    transition: background-color 0.3s ease;"
+    onmouseover="this.style.backgroundColor='gray'"
+    onmouseout="this.style.backgroundColor='lightgray'" class="btn btn-outline-info">Retornar
+</a>
+</div>

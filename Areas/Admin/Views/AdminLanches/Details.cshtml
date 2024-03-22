@@ -4,69 +4,103 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 style="text-align: center;">Detalhes do Lanche</h1>
 
 <div>
-    <h4>Lanche</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescricaoCurta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescricaoCurta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescricaoDetalhada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescricaoDetalhada)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Preco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Preco.ToString("C")
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagemUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagemUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagemThumbnailUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagemThumbnailUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsLanchePreferido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsLanchePreferido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmEstoque)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmEstoque)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CategoriaNome)
-        </dd>
+        <div class="row justify-content-center">
+            <div class="form-group col-sm-6 d-flex justify-content-center">
+                <img src="@Model.ImagemUrl" class="img-fluid" />
+            </div>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2" style="padding-right:2%;">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2" style="padding-right:2%" ;>
+                @Html.DisplayNameFor(model => model.DescricaoCurta)
+            </dt>
+            <dd class=" col-md-10 col-sm-10 col-xs-10 col-lg-10">
+                @Html.DisplayFor(model => model.DescricaoCurta)
+            </dd>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2" style="padding-right:2%" ;>
+                @Html.DisplayNameFor(model => model.DescricaoDetalhada)
+            </dt>
+            <dd class="col-md-10 col-sm-10 col-xs-10 col-lg-10" style="padding-right:2%" ;>
+                @Html.DisplayFor(model => model.DescricaoDetalhada)
+            </dd>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2" style="padding-right:2%;">
+                @Html.DisplayNameFor(model => model.Preco)
+            </dt>
+            <dd class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+                @Model.Preco.ToString("C")
+            </dd>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2"style="padding-right:2%;">
+                @Html.DisplayNameFor(model => model.IsLanchePreferido)
+            </dt>
+            <dd class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+                @Html.DisplayFor(model => model.IsLanchePreferido)
+            </dd>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2"style="padding-right:2%;">
+                @Html.DisplayNameFor(model => model.EmEstoque)
+            </dt>
+            <dd class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+                @Html.DisplayFor(model => model.EmEstoque)
+            </dd>
+        </div>
+        <div class="input-group">
+            <dt class="col-md-2 col-sm-2 col-xs-2 col-lg-2" style="padding-right:2%;">
+                @Html.DisplayNameFor(model => model.Categoria)
+            </dt>
+            <dd class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+                @Html.DisplayFor(model => model.Categoria.CategoriaNome)
+            </dd>
+        </div>
     </dl>
 </div>
+
+@* <div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="@Model.ImagemUrl" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.Nome)</dt>
+                <dd class="col-md-9">@Html.DisplayFor(model => model.Nome)</dd>
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.DescricaoCurta)</dt>
+                <dd class="col-md-9">@Html.DisplayFor(model => model.DescricaoCurta)</dd>
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.DescricaoDetalhada)</dt>
+                <dd class="col-md-9">@Html.DisplayFor(model => model.DescricaoDetalhada)</dd>
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.Preco)</dt>
+                <dd class="col-md-9">@Model.Preco.ToString("C")</dd>
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.IsLanchePreferido)</dt>
+                <dd class="col-md-9">@Html.DisplayFor(model => model.IsLanchePreferido)</dd>
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.EmEstoque)</dt>
+                <dd class="col-md-9">@Html.DisplayFor(model => model.EmEstoque)</dd>
+                <dt class="col-md-3">@Html.DisplayNameFor(model => model.Categoria)</dt>
+                <dd class="col-md-9">@Html.DisplayFor(model => model.Categoria.CategoriaNome)</dd>
+            </dl>
+        </div>
+    </div>
+</div> *@
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.LancheId">Edit</a> |
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.LancheId">Editar</a> 
     <a class="btn btn-outline-info" asp-action="Index">Voltar</a>
 </div>
