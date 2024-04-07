@@ -31,7 +31,12 @@ public class Startup{
         //     options.Password.RequiredLength = 8;
         //     options.Password.RequiredUniqueChars =1;
         // }); 
+
+        /*string dataSource = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost";
+        string connectionString = $"Server={dataSource};" + Configuration.GetConnectionString("DefaultConnection"); ;
+        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); */
         services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        
         services.AddTransient<ILanchesRepository,LancheRepository>();
         services.AddTransient<ICategoriaRepository,CategoriaRepository>();
         services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();

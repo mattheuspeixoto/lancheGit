@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Views\AdminImagens\**" />
+    <Content Remove="Areas\Admin\Views\AdminImagens\**" />
+    <EmbeddedResource Remove="Areas\Admin\Views\AdminImagens\**" />
+    <None Remove="Areas\Admin\Views\AdminImagens\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Controllers\AdminImagensController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.28">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
